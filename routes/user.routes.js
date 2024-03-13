@@ -5,6 +5,14 @@ const User = require("../models/User.model")
 
 // GET para obtener los detalles del usuario loggeado
 // /api/user
+router.get("/", async (req, res, next) => {
+    try {
+        const response = await User.find()
+        res.status(200).json(response)
+    } catch (error) {
+        next(error)
+    }
+})
 
 
 // GET para listar las rutas del usuario loggeado

@@ -42,18 +42,26 @@ router.post("/signup", async (req, res, next) => {
 
   try {
     // validar que el usuario no exista en la DB
-    const foundUser = await User.findOne({
-      $or: [{ email: email }, { username: username }],
+    // creamos 2 .findOne, uno para email y otro para username
+    const foundUserEmail = await User.findOne({
+        email: email 
     });
-    if (foundUser.email !== null) {
+    if (foundUserEmail !== null) {
       res.status(400).json({ message: "correo ya registrado" });
       return;
-    } else if (foundUser.username !== null) {
-      res
-        .status(400)
-        .json({ message: "username ya en uso, por favor escoja otro" });
+    } 
+
+    const foundUserUsername = await User.findOne({
+        username: username 
+    });
+   
+    if (foundUserUsername !== null) {
+      res.status(400).json({ message: "username ya registrado" });
       return;
-    }
+    } 
+
+    
+
 
     const salt = await bcrypt.genSalt(12);
     const hashPassword = await bcrypt.hash(password, salt);
@@ -74,7 +82,9 @@ router.post("/signup", async (req, res, next) => {
 // POST "api/auth/login" => validar las credenciales del usuario y enviar un Token
 
 router.post("/login", async (req, res, next) => {
+  
   const { credential, password } = req.body;
+  console.log(credential)
 
   if (!credential || !password) {
     res.status(400).json({ message: "credential y password obligatorios" });
@@ -84,7 +94,7 @@ router.post("/login", async (req, res, next) => {
   try {
     // compronar si el usuario existe o no en la DB
     const foundUser = await User.findOne({
-      $or: [{ email: credential }, {username: credential }],
+      $or: [{ email: credential }, {username: credential }]
     });
     if (foundUser === null) {
       res.status(400).json({ message: "usuario no registrado" });
