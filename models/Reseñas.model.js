@@ -7,7 +7,7 @@ const reseñaSchema = new Schema({
         type: String,
         required: true
     },
-    desciption: {
+    description: {
         type: String,
         required: true
     },
@@ -15,6 +15,10 @@ const reseñaSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }, 
+    ruta: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Rutas"
+    },
     image: {
         type: String,
         default: ""

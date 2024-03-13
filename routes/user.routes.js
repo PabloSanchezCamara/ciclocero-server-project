@@ -3,11 +3,16 @@ const router = express.Router()
 
 const User = require("../models/User.model")
 
+const { isTokenValid } = require("../middlewares/auth.middlewares");
+
 // GET para obtener los detalles del usuario loggeado
+
 // /api/user
-router.get("/", async (req, res, next) => {
+router.get("/", isTokenValid, async (req, res, next) => {
+    console.log(req.payload)
+    const loggedId = req.payload._id
     try {
-        const response = await User.find()
+        const response = await User.findById(loggedId)
         res.status(200).json(response)
     } catch (error) {
         next(error)
@@ -17,6 +22,7 @@ router.get("/", async (req, res, next) => {
 
 // GET para listar las rutas del usuario loggeado
 // /api/user/rutas
+
 
 
 // GET para listas las rutas fav del usuario loggeado

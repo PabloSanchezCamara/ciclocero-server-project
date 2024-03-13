@@ -122,6 +122,7 @@ router.post("/login", async (req, res, next) => {
       algorithm: "HS256",
       expiresIn: "10d", // poner que expire si el usuario no entra en X tiempo
     });
+    res.status(200).json({authToken: authToken})
   } catch (error) {
     next(error);
   }

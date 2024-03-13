@@ -12,9 +12,9 @@ router.use("/auth", authRouter)
 const rutasRouter = require("./rutas.routes")
 router.use("/rutas", rutasRouter)
 
-// /api/reseñas
+// /api/reviews
 const reseñasRouter = require("./reseñas.routes")
-router.use("/reseñas", reseñasRouter)
+router.use("/reviews", reseñasRouter)
 
 // /api/user
 const userRouter = require("./user.routes")
