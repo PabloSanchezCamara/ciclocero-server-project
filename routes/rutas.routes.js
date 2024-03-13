@@ -7,6 +7,8 @@ const Rutas = require("../models/Rutas.model")
 // GET listar todas las rutas    // QUERYS?
 // /api/rutas   
 
+// un condicional de estoy recibiendo querys? si no lo estoy recibiendo .find() y si si lo recibe .find(lo que hayamos buscado)
+
 
 // POST crear una ruta
 // api/rutas
