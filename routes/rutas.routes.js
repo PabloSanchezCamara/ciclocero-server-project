@@ -3,18 +3,20 @@ const router = express.Router()
 
 const Rutas = require("../models/Rutas.model")
 
-const { isTokenValid } = require("../middlewares/auth.middlewares");
 
 
-// GET listar todas las rutas    // QUERYS?
+
+// GET listar todas las rutas    
 // /api/rutas   
 
-// un condicional de estoy recibiendo querys? si no lo estoy recibiendo .find() y si si lo recibe .find(lo que hayamos buscado)
-
-router.get("/", isTokenValid, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
+    const query = req.query
+    console.log(query)
     try {
-        const response = await Rutas.find().populate("creador")
-        res.status(200).json(response)
+        const response = await Rutas.find(query).populate({
+            path: "creador",
+            select: {"username": 1, "image": 1, "_id": 0}})
+        res.status(200).json(response) 
     } catch (error) {
         next(error)
     }
@@ -23,7 +25,7 @@ router.get("/", isTokenValid, async (req, res, next) => {
 
 // POST crear una ruta
 // api/rutas
-router.post("/", isTokenValid, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image } = req.body
 
     const response = await Rutas.create({
@@ -35,7 +37,7 @@ router.post("/", isTokenValid, async (req, res, next) => {
 
 // PATCH editar foto de la ruta
 // /api/rutas/:rutaId
-router.patch("/:rutaId", isTokenValid, async (req, res, next) => {
+router.patch("/:rutaId", async (req, res, next) => {
     const {image} = req.body
     // console.log(req.params.rutaId)
     try {
@@ -50,7 +52,7 @@ router.patch("/:rutaId", isTokenValid, async (req, res, next) => {
 
 // PUT editar una ruta 
 // /api/rutas/:rutaId
-router.put("/:rutaId", isTokenValid, async (req, res, next) => {
+router.put("/:rutaId", async (req, res, next) => {
     const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image } = req.body
     // console.log(req.params.rutaId)
     try {
@@ -59,7 +61,7 @@ router.put("/:rutaId", isTokenValid, async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-    // MEJOR PATCH Y QUITAR IMAGE?
+    // MEJOR PATCH Y QUITAR IMAGE? SI
 
 })
 
@@ -67,7 +69,7 @@ router.put("/:rutaId", isTokenValid, async (req, res, next) => {
 // DELETE eliminar ruta
 // /api/rutas/:rutaId
 
-router.delete("/:rutaId", isTokenValid, async (req, res, next) => {
+router.delete("/:rutaId", async (req, res, next) => {
     try {
         await Rutas.findByIdAndDelete(req.params.rutaId)
         res.status(202).json({message: "ruta eliminada"})

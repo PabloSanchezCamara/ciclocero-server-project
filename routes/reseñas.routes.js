@@ -3,12 +3,16 @@ const router = express.Router()
 
 const Reseñas = require("../models/Reseñas.model")
 
-const { isTokenValid } = require("../middlewares/auth.middlewares");
+const Rutas = require("../models/Rutas.model")
+
+const User = require("../models/User.model")
+
+
 
 
 // POST crear reseña
 // /api/reviews
-router.post("/", isTokenValid, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
     const { title, description, creador, ruta, image } = req.body
     try {
         const response = await Reseñas.create({
@@ -23,7 +27,7 @@ router.post("/", isTokenValid, async (req, res, next) => {
 
 // PATCH editar foto de reseña
 // /api/reviews/:reviewId
-router.patch("/:reviewId", isTokenValid, async (req, res, next) => {
+router.patch("/:reviewId", async (req, res, next) => {
     const {image} = req.body
     try {
         const response = await Reseñas.findByIdAndUpdate(req.params.reviewId, {image}, {new: true})
@@ -36,7 +40,7 @@ router.patch("/:reviewId", isTokenValid, async (req, res, next) => {
 
 // PUT editar reviewId
 // /api/reviews/:reviewId
-router.put("/:reviewId", isTokenValid, async (req, res, next) => {
+router.put("/:reviewId", async (req, res, next) => {
     const { title, description, creador, ruta, image } = req.body
 
     try {
@@ -51,7 +55,7 @@ router.put("/:reviewId", isTokenValid, async (req, res, next) => {
 
 // DELETE borrar reviewId
 // /api/reviews/:reviewId
-router.delete("/:reviewId", isTokenValid, async (req, res, next) => {
+router.delete("/:reviewId", async (req, res, next) => {
     
     try {
         await Reseñas.findByIdAndDelete(req.params.reviewId)
@@ -65,7 +69,7 @@ router.delete("/:reviewId", isTokenValid, async (req, res, next) => {
 
 // GET listar reviewId por ruta
 // /api/reviews/rutas/:rutaId
-router.get("/rutas/:rutaId", isTokenValid, async (req, res, next) => {
+router.get("/rutas/:rutaId", async (req, res, next) => {
     try {
         const response = await Reseñas.findById(req.params.rutaId)
         res.status(200).json(response)
@@ -74,9 +78,12 @@ router.get("/rutas/:rutaId", isTokenValid, async (req, res, next) => {
     }
 })
 
+// DEBERIA IR EN RUTAS? llamar al modelo de rutas
+
 
 // GET listar reviews por usuario 
 // /api/reviews/user/:userId
 
+// DEBERIA IR EN USER? llamar al modelo de user
 
 module.exports = router

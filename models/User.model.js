@@ -24,7 +24,7 @@ const userSchema = new Schema(
       default: "https://www.flaticon.es/icono-gratis/usuario_545736?related_id=545837&origin=search"
     },
     rutasFav: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: [mongoose.Schema.Types.ObjectId],
       ref: "Rutas"
     }
 
