@@ -3,9 +3,6 @@ const router = express.Router()
 
 const Rutas = require("../models/Rutas.model")
 
-
-
-
 // GET listar todas las rutas    
 // /api/rutas   
 
@@ -22,7 +19,6 @@ router.get("/", async (req, res, next) => {
     }
 })
 
-
 // POST crear una ruta
 // api/rutas
 router.post("/", async (req, res, next) => {
@@ -34,10 +30,9 @@ router.post("/", async (req, res, next) => {
     res.status(201).json(response)
 })
 
-
 // PATCH editar foto de la ruta
 // /api/rutas/:rutaId
-router.patch("/:rutaId", async (req, res, next) => {
+router.patch("/image/:rutaId", async (req, res, next) => {
     const {image} = req.body
     // console.log(req.params.rutaId)
     try {
@@ -49,22 +44,19 @@ router.patch("/:rutaId", async (req, res, next) => {
 
 })
 
-
-// PUT editar una ruta 
+// PATCH editar una ruta 
 // /api/rutas/:rutaId
-router.put("/:rutaId", async (req, res, next) => {
-    const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image } = req.body
+router.patch("/details/:rutaId", async (req, res, next) => {
+    const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia } = req.body
     // console.log(req.params.rutaId)
     try {
-        const response = await Rutas.findByIdAndUpdate(req.params.rutaId, { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image }, {new: true})
+        const response = await Rutas.findByIdAndUpdate(req.params.rutaId, { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia }, {new: true})
         res.status(202).json(response)
     } catch (error) {
         next(error)
     }
-    // MEJOR PATCH Y QUITAR IMAGE? SI
 
 })
-
 
 // DELETE eliminar ruta
 // /api/rutas/:rutaId

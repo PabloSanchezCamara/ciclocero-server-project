@@ -8,7 +8,7 @@ router.get("/", (req, res, next) => {
 
 // /api/auth
 const authRouter = require("./auth.routes")
-router.use("/auth", isTokenValid, authRouter)
+router.use("/auth", authRouter)
 
 // /api/rutas
 const rutasRouter = require("./rutas.routes")

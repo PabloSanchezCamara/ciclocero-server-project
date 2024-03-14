@@ -7,7 +7,6 @@ const User = require("../models/User.model");
 const Rutas = require("../models/Rutas.model");
 
 // GET para obtener los detalles del usuario loggeado
-
 // /api/user
 router.get("/", async (req, res, next) => {
   console.log(req.payload);
@@ -20,8 +19,6 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-
-
 
 // GET para listar las rutas del usuario loggeado
 // /api/user/rutas
@@ -38,20 +35,29 @@ router.get("/rutas", async (req, res, next) => {
   }
 });
 
-
-// PATCH para modificar las rutasFav
-// /api/user/rutas-fav
-router.patch("/rutas-fav", async (req, res, next) => {
-    const {rutasFav} = req.body
+// PATCH añadir rutasFav
+// /api/user/rutas-fav-add
+router.patch("/rutas-fav-add", async (req, res, next) => {
+    const {rutaAgregar} = req.body
     try {
-        const response = await User.findByIdAndUpdate(req.payload._id, {rutasFav}, {new: true})
+        const response = await User.findByIdAndUpdate(req.payload._id, {$push: {rutasFav: rutaAgregar}}, {new: true})
         res.status(202).json(response)
     } catch (error) {
         next(error)
     }
 })
 
-
+// PATCH para modificar las rutasFav
+// /api/user/rutas-fav-remove
+router.patch("/rutas-fav-remove", async (req, res, next) => {
+    const {rutaRemove} = req.body
+    try {
+        const response = await User.findByIdAndUpdate(req.payload._id, {$pull: {rutasFav: rutaRemove}}, {new: true})
+        res.status(202).json(response)
+    } catch (error) {
+        next(error)
+    }
+})
 
 // GET para listas las rutas fav del usuario loggeado
 // /api/user/rutas-fav
@@ -125,15 +131,16 @@ router.patch("/email", async (req, res, next) => {
   }
 
   try {
-    const foundUserEmail = await User.findOne({
+    // buscamos un user que tenga ese email
+    const foundUser = await User.findOne({
         email: email 
     });
-    if (foundUserEmail !== null) {
+    if (foundUser !== null) {
       res.status(400).json({ message: "correo ya registrado" });
       return;
     } 
     const response = await User.findByIdAndUpdate(req.payload._id, 
-        {email: foundUserEmail}, {new: true})
+        {email: email}, {new: true})
         console.log(response)
     res.status(202).json({message: `Modificado con exito, su nuevo email es: ${email}`})
 
@@ -147,19 +154,22 @@ router.patch("/email", async (req, res, next) => {
 router.patch("/username", async (req, res, next) => {
     const {username} = req.body
     try {
-        const foundUserUsername = await User.findOne({
+        const foundUser = await User.findOne({
             username: username 
         });
        
-        if (foundUserUsername !== null) {
+        if (foundUser !== null) {
           res.status(400).json({ message: "username ya registrado" });
           return;
         } 
+        const response = await User.findByIdAndUpdate(req.payload._id, 
+            {username: username}, {new: true})
+            console.log(response)
+        res.status(202).json({message: `Modificado con exito, su nuevo username es: ${username}`})
     } catch (error) {
         next(error)
     }
 })
-
 
 // DELETE para eliminar usuario loggeado
 // /api/user

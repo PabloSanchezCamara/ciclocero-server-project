@@ -25,7 +25,7 @@ const userSchema = new Schema(
     },
     rutasFav: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: "Rutas"
+      ref: "Ruta"
     }
 
   },

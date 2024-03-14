@@ -17,7 +17,7 @@ const reseñaSchema = new Schema({
     }, 
     ruta: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Rutas"
+        ref: "Ruta"
     },
     image: {
         type: String,
