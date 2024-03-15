@@ -8,6 +8,7 @@ function isTokenValid(req, res, next) {
         const tokenArr = req.headers.authorization.split(" ")
 
         const token = tokenArr[1]
+        console.log(token)
 
         const payload = jwt.verify(token, process.env.TOKEN_SECRET)
 

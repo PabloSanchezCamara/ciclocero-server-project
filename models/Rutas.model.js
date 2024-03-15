@@ -8,7 +8,7 @@ const rutaSchema = new Schema({
     difficulty: {
         type: String,
         required: true,
-        enum: ["Fácil", "Media", "Difícil", "Profesional"]
+        enum: ["fácil", "media", "difícil", "profesional"]
     },
     distanciaEnKm: {
         type: Number, 
@@ -25,7 +25,7 @@ const rutaSchema = new Schema({
     modalidad: {
         type: String,
         required: true,
-        enum: ["Montaña", "Urbano", "Carretera", "Gravel"]
+        enum: ["montaña", "urbano", "carretera", "gravel"]
     }, 
     circular: {
         type: Boolean,
