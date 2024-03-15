@@ -19,6 +19,18 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+// GET listar detalles de una ruta
+router.get("/:rutaId", async (req, res, next) => {
+    try {
+
+        const response = await Rutas.findById(req.params.rutaId)
+        res.status(200).json(response)
+        
+    } catch (error) {
+        next(error)
+    }
+})
+
 // POST crear una ruta
 // api/rutas
 router.post("/", async (req, res, next) => {
