@@ -22,4 +22,9 @@ router.use("/reviews", isTokenValid, reseñasRouter)
 const userRouter = require("./user.routes")
 router.use("/user", isTokenValid, userRouter)
 
+
+// Cloudinary
+const uploadRoutes = require("./upload.routes");
+router.use("/upload", uploadRoutes);
+
 module.exports = router;
