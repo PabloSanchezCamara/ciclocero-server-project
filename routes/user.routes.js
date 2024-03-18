@@ -80,9 +80,11 @@ router.patch("/image", async (req, res, next) => {
     const {image} = req.body
     try {
         const response = await User.findByIdAndUpdate(req.payload._id, {
+
             image
         }, {new: true})
-        res.status(202).json({message: "foto modificada"})
+        console.log(response)
+        res.status(202).json(response)
     } catch (error) {
         next(error)
     }

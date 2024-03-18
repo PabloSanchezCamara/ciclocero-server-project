@@ -8,6 +8,7 @@ const Rutas = require("../models/Rutas.model")
 
 router.get("/", async (req, res, next) => {
     const query = req.query
+    //busquedas multiples con el OR en el find() con el valor que viene del FE
     console.log(query)
     try {
         const response = await Rutas.find(query).populate({
@@ -37,7 +38,7 @@ router.post("/", async (req, res, next) => {
     const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image } = req.body
 
     const response = await Rutas.create({
-        name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image
+        name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador:req.payload._id, image
     })
     res.status(201).json(response)
 })
