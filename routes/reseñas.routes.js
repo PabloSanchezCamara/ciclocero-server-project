@@ -6,10 +6,11 @@ const Reseñas = require("../models/Reseñas.model")
 // POST crear reseña
 // /api/reviews
 router.post("/", async (req, res, next) => {
+    console.log(req.payload)
     const { title, description, creador, ruta, image } = req.body
     try {
         const response = await Reseñas.create({
-            title, description, creador, ruta, image
+            title, description, creador: req.payload._id, ruta, image
         })
         res.status(201).json(response)
     } catch (error) {

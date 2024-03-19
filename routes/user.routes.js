@@ -114,8 +114,9 @@ router.patch("/password", async (req, res, next) => {
       {  password: hashPassword},
       { new: true }
     );
-    res.status(202).json({message: "password modificada con éxito"});
+    res.status(202).json(response);
   } catch (error) {
+    console.log(error)
     next(error);
   }
 });
@@ -144,7 +145,7 @@ router.patch("/email", async (req, res, next) => {
     const response = await User.findByIdAndUpdate(req.payload._id, 
         {email: email}, {new: true})
         console.log(response)
-    res.status(202).json({message: `Modificado con exito, su nuevo email es: ${email}`})
+    res.status(202).json(response)
 
   } catch (error) {
     next(error)
@@ -167,7 +168,7 @@ router.patch("/username", async (req, res, next) => {
         const response = await User.findByIdAndUpdate(req.payload._id, 
             {username: username}, {new: true})
             console.log(response)
-        res.status(202).json({message: `Modificado con exito, su nuevo username es: ${username}`})
+        res.status(202).json(response)
     } catch (error) {
         next(error)
     }
