@@ -49,7 +49,8 @@ const rutaSchema = new Schema({
         type: String,
         default: "https://www.freepik.es/vector-premium/icono-ruta-bicicleta-simbolo-ilustracion-mapa-viaje-signo-vector-puntero-navegacion_36816907.htm"
     },
-    coordinates: [{Number}] //preguntar si hacer un array de arrays con cada punto de la ruta
+    coordinatesStart: [Number], //preguntar si hacer un array de arrays con cada punto de la ruta
+    coordinatesEnd: [Number]
 })
 
 const Ruta = model("Ruta", rutaSchema);

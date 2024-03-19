@@ -35,10 +35,10 @@ router.get("/:rutaId", async (req, res, next) => {
 // POST crear una ruta
 // api/rutas
 router.post("/", async (req, res, next) => {
-    const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image } = req.body
+    const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image, coordinatesStart, coordinatesEnd } = req.body
 
     const response = await Rutas.create({
-        name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador:req.payload._id, image
+        name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador:req.payload._id, image, coordinatesStart, coordinatesEnd
     })
     res.status(201).json(response)
 })

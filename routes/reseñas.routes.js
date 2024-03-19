@@ -77,6 +77,7 @@ router.get("/user", async (req, res, next) => {
 // DELETE borrar reviewId
 // /api/reviews/:reviewId
 router.delete("/:reviewId", async (req, res, next) => {
+    console.log(req.params)
     
     try {
         await Reseñas.findByIdAndDelete(req.params.reviewId)
