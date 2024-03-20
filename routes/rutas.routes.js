@@ -35,10 +35,11 @@ router.get("/:rutaId", async (req, res, next) => {
 // POST crear una ruta
 // api/rutas
 router.post("/", async (req, res, next) => {
-    const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador, image, coordinatesStart, coordinatesEnd } = req.body
+    console.log(req.body)
+    const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, provincia, creador, image, coordinatesStart, coordinatesEnd } = req.body
 
     const response = await Rutas.create({
-        name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia, creador:req.payload._id, image, coordinatesStart, coordinatesEnd
+        name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, provincia, creador:req.payload._id, image, coordinatesStart, coordinatesEnd
     })
     res.status(201).json(response)
 })
@@ -60,10 +61,10 @@ router.patch("/image/:rutaId", async (req, res, next) => {
 // PATCH editar una ruta 
 // /api/rutas/:rutaId
 router.patch("/details/:rutaId", async (req, res, next) => {
-    const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia } = req.body
+    const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, provincia } = req.body
     // console.log(req.params.rutaId)
     try {
-        const response = await Rutas.findByIdAndUpdate(req.params.rutaId, { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, circular, comunidad, provincia }, {new: true})
+        const response = await Rutas.findByIdAndUpdate(req.params.rutaId, { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, provincia }, {new: true})
         res.status(202).json(response)
     } catch (error) {
         next(error)
