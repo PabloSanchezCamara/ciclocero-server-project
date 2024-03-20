@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
     try {
         const response = await Rutas.find(query).populate({
             path: "creador",
-            select: {"username": 1, "image": 1, "_id": 0}})
+            select: {"username": 1, "image": 1, "_id": 1}})
         res.status(200).json(response) 
     } catch (error) {
         next(error)

@@ -51,7 +51,7 @@ router.get("/rutas/:rutaId", async (req, res, next) => {
     try {
         const response = await Reseñas.find({ruta: req.params.rutaId}).populate({
             path: "creador",
-            select: { username: 1, image: 1, _id: 0 },
+            select: { username: 1, image: 1, _id: 1 },
         })
         console.log(response)
         res.status(200).json(response)
