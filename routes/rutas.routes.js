@@ -20,11 +20,23 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+//api/rutas/user
+router.get("/user", async (req, res, next) => {
+
+    try {
+        const response = await Rutas.find({creador: req.payload._id})
+        res.status(200).json(response)
+        
+    } catch (error) {
+        next(error)
+    }
+})
+
 // GET listar todas las rutas con querys 
 // /api/rutas/query   
 
 router.get("/query", async (req, res, next) => {
-    const queryValue = req.query.queryValue
+    const queryValue = req.query.queryValue.toLowerCase()
     //busquedas multiples con el OR en el find() con el valor que viene del FE
     console.log(queryValue)
     try {

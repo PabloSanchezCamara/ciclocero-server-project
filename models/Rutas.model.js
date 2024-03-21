@@ -8,7 +8,7 @@ const rutaSchema = new Schema({
     difficulty: {
         type: String,
         required: true,
-        enum: ["facil", "media", "dificil", "profesional"]
+        enum: ["fácil", "media", "difícil", "profesional"]
     },
     distanciaEnKm: {
         type: Number, 
@@ -30,7 +30,7 @@ const rutaSchema = new Schema({
     provincia: {
         type: String,
         required: true,
-        enum: ["Alava", "Almeria", "Avila", "Asturias", "Badajoz", "Baleares", "Barcelona", "Burgos", "Cantabria", "Castellon", "Ciudad Real", "Cuenca", "Caceres", "Cadiz","Cordoba","Girona","Granada","Guadalajara","Guipuzcoa","Huelva","Huesca","Jaen","La Coruña","La Rioja","Las Palmas","Leon","Lugo","Lerida","Madrid","Murcia","Malaga","Navarra","Orense","Palencia","Pontevedra","Salamanca","Santa Cruz de Tenerife","Segovia","Sevilla","Soria","Tarragona","Teruel","Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza"]
+        enum: ["alava", "almeria", "avila", "asturias", "badajoz", "baleares", "barcelona", "burgos", "cantabria", "castellon", "ciudad real", "cuenca", "caceres", "cadiz","cordoba","girona","granada","guadalajara","guipuzcoa","huelva","huesca","jaen","la coruña","la rioja","las palmas","leon","lugo","lerida","madrid","murcia","malaga","navarra","orense","palencia","pontevedra","salamanca","tenerife","segovia","sevilla","soria","tarragona","teruel","toledo","valencia","valladolid","vizcaya","zamora","zaragoza"]
     },
     creador: {
         type: mongoose.Schema.Types.ObjectId,
