@@ -8,7 +8,7 @@ const rutaSchema = new Schema({
     difficulty: {
         type: String,
         required: true,
-        enum: ["fácil", "media", "difícil", "profesional"]
+        enum: ["facil", "media", "dificil", "profesional"]
     },
     distanciaEnKm: {
         type: Number, 
