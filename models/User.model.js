@@ -20,7 +20,7 @@ const userSchema = new Schema(
     }, 
     image: {
       type: String,
-      default: "https://www.flaticon.es/icono-gratis/usuario_545736?related_id=545837&origin=search"
+      default: "https://i.pinimg.com/564x/67/2c/d6/672cd616936e481ef2632306731a87cd.jpg"
     },
     rutasFav: {
       type: [mongoose.Schema.Types.ObjectId],

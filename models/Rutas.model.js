@@ -38,7 +38,7 @@ const rutaSchema = new Schema({
     },
     image: {
         type: String,
-        default: "https://www.freepik.es/vector-premium/icono-ruta-bicicleta-simbolo-ilustracion-mapa-viaje-signo-vector-puntero-navegacion_36816907.htm"
+        default: "https://www.lugaresdeaventura.com/sites/default/files/2018-07/suiza-paraiso-ciclista-portada.jpg"
     },
     coordinatesStart: [Number], //preguntar si hacer un array de arrays con cada punto de la ruta
     coordinatesEnd: [Number]
