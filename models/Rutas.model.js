@@ -30,7 +30,7 @@ const rutaSchema = new Schema({
     provincia: {
         type: String,
         required: true,
-        enum: ["Álava", "Almería", "Ávila", "Asturias", "Badajoz", "Baleares", "Barcelona", "Burgos", "Cantabria", "Castellón", "Ciudad Real", "Cuenca", "Cáceres", "Cádiz","Córdoba","Girona","Granada","Guadalajara","Guipúzcoa","Huelva","Huesca","Jaén","La Coruña","La Rioja","Las Palmas","León","Lugo","Lérida","Madrid","Murcia","Málaga","Navarra","Orense","Palencia","Pontevedra","Salamanca","Santa Cruz de Tenerife","Segovia","Sevilla","Soria","Tarragona","Teruel","Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza"]
+        enum: ["Alava", "Almeria", "Avila", "Asturias", "Badajoz", "Baleares", "Barcelona", "Burgos", "Cantabria", "Castellon", "Ciudad Real", "Cuenca", "Caceres", "Cadiz","Cordoba","Girona","Granada","Guadalajara","Guipuzcoa","Huelva","Huesca","Jaen","La Coruña","La Rioja","Las Palmas","Leon","Lugo","Lerida","Madrid","Murcia","Malaga","Navarra","Orense","Palencia","Pontevedra","Salamanca","Santa Cruz de Tenerife","Segovia","Sevilla","Soria","Tarragona","Teruel","Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza"]
     },
     creador: {
         type: mongoose.Schema.Types.ObjectId,

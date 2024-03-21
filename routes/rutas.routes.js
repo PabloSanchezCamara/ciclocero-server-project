@@ -7,13 +7,15 @@ const Rutas = require("../models/Rutas.model")
 // /api/rutas   
 
 router.get("/", async (req, res, next) => {
-    const query = req.query
+    const queryValue = req.query.queryValue
     //busquedas multiples con el OR en el find() con el valor que viene del FE
-    console.log(query)
+    console.log(queryValue)
     try {
-        const response = await Rutas.find(query).populate({
+        const response = await Rutas.find({$or: [{provincia: queryValue}, {difficulty: queryValue}, {modalidad: queryValue}]}).populate({
             path: "creador",
-            select: {"username": 1, "image": 1, "_id": 1}})
+            select: {"username": 1, "image": 1, "_id": 1}
+        })
+        console.log(response)
         res.status(200).json(response) 
     } catch (error) {
         next(error)
