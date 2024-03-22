@@ -9,65 +9,11 @@ const Rutas = require("../models/Rutas.model");
 // GET para obtener los detalles del usuario loggeado
 // /api/user
 router.get("/", async (req, res, next) => {
-  console.log(req.payload);
+  
   const loggedId = req.payload._id;
   try {
     const response = await User.findById(loggedId);
-    console.log(response);
-    res.status(200).json(response);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// GET para listar las rutas del usuario loggeado
-// /api/user/rutas
-router.get("/rutas", async (req, res, next) => {
-  console.log(req.payload);
-  try {
-    const response = await Rutas.find({ creador: req.payload._id }).populate({
-      path: "creador",
-      select: { username: 1, image: 1, _id: 0 },
-    });
-    res.status(200).json(response);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// PATCH añadir rutasFav
-// /api/user/rutas-fav-add
-router.patch("/rutas-fav-add", async (req, res, next) => {
-    const {rutaAgregar} = req.body
-    try {
-        const response = await User.findByIdAndUpdate(req.payload._id, {$push: {rutasFav: rutaAgregar}}, {new: true})
-        res.status(202).json(response)
-    } catch (error) {
-        next(error)
-    }
-})
-
-// PATCH para modificar las rutasFav
-// /api/user/rutas-fav-remove
-router.patch("/rutas-fav-remove", async (req, res, next) => {
-    const {rutaRemove} = req.body
-    try {
-        const response = await User.findByIdAndUpdate(req.payload._id, {$pull: {rutasFav: rutaRemove}}, {new: true})
-        res.status(202).json(response)
-    } catch (error) {
-        next(error)
-    }
-})
-
-// GET para listas las rutas fav del usuario loggeado
-// /api/user/rutas-fav
-router.get("/rutas-fav", async (req, res, next) => {
-  console.log(req.payload);
- 
-  try {
-    const response = await User.findById(req.payload._id).populate({
-            path: "rutasFav",
-            select: {"_id": 0}})
+    
     res.status(200).json(response);
   } catch (error) {
     next(error);
@@ -83,7 +29,7 @@ router.patch("/image", async (req, res, next) => {
 
             image
         }, {new: true})
-        console.log(response)
+        
         res.status(202).json(response)
     } catch (error) {
         next(error)
@@ -107,7 +53,7 @@ router.patch("/password", async (req, res, next) => {
   try {
     const salt = await bcrypt.genSalt(12);
     const hashPassword = await bcrypt.hash(password, salt);
-    console.log(hashPassword);
+    
 
     const response = await User.findByIdAndUpdate(
       req.payload._id,
@@ -116,7 +62,7 @@ router.patch("/password", async (req, res, next) => {
     );
     res.status(202).json(response);
   } catch (error) {
-    console.log(error)
+    
     next(error);
   }
 });
@@ -144,7 +90,7 @@ router.patch("/email", async (req, res, next) => {
     } 
     const response = await User.findByIdAndUpdate(req.payload._id, 
         {email: email}, {new: true})
-        console.log(response)
+        
     res.status(202).json(response)
 
   } catch (error) {
@@ -152,7 +98,7 @@ router.patch("/email", async (req, res, next) => {
   }
 })
 
-// PATCH para editar email
+// PATCH para editar username
 // /api/user/username
 router.patch("/username", async (req, res, next) => {
     const {username} = req.body
@@ -167,7 +113,7 @@ router.patch("/username", async (req, res, next) => {
         } 
         const response = await User.findByIdAndUpdate(req.payload._id, 
             {username: username}, {new: true})
-            console.log(response)
+            
         res.status(202).json(response)
     } catch (error) {
         next(error)

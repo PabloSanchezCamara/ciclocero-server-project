@@ -65,7 +65,7 @@ router.post("/signup", async (req, res, next) => {
 
     const salt = await bcrypt.genSalt(12);
     const hashPassword = await bcrypt.hash(password, salt);
-    console.log(hashPassword);
+    
 
     const response = await User.create({
       email,
@@ -84,7 +84,7 @@ router.post("/signup", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   
   const { credential, password } = req.body;
-  console.log(credential)
+  
 
   if (!credential || !password) {
     res.status(400).json({ message: "credential y password obligatorios" });
@@ -131,7 +131,7 @@ router.post("/login", async (req, res, next) => {
 // GET "/api/auth/verify" => validar el token e indicar que el usuario esta autenticado
 
 router.get("/verify", isTokenValid, (req, res, next) => {
-  console.log(req.payload);
+  
 
   res.json(req.payload);
 });

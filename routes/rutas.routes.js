@@ -5,7 +5,6 @@ const Rutas = require("../models/Rutas.model")
 
 // GET listar todas las rutas    
 // /api/rutas   
-
 router.get("/", async (req, res, next) => {
   
     try {
@@ -13,13 +12,14 @@ router.get("/", async (req, res, next) => {
             path: "creador",
             select: {"username": 1, "image": 1, "_id": 1}
         })
-        console.log(response)
+        
         res.status(200).json(response) 
     } catch (error) {
         next(error)
     }
 })
 
+// GET listar rutas del usuario
 //api/rutas/user
 router.get("/user", async (req, res, next) => {
 
@@ -34,17 +34,15 @@ router.get("/user", async (req, res, next) => {
 
 // GET listar todas las rutas con querys 
 // /api/rutas/query   
-
 router.get("/query", async (req, res, next) => {
     const queryValue = req.query.queryValue.toLowerCase()
     //busquedas multiples con el OR en el find() con el valor que viene del FE
-    console.log(queryValue)
     try {
         const response = await Rutas.find({$or: [{provincia: queryValue}, {difficulty: queryValue}, {modalidad: queryValue}]}).populate({
             path: "creador",
             select: {"username": 1, "image": 1, "_id": 1}
         })
-        console.log(response)
+        
         res.status(200).json(response) 
     } catch (error) {
         next(error)
@@ -55,7 +53,10 @@ router.get("/query", async (req, res, next) => {
 router.get("/:rutaId", async (req, res, next) => {
     try {
 
-        const response = await Rutas.findById(req.params.rutaId)
+        const response = await Rutas.findById(req.params.rutaId).populate({
+            path: "creador",
+            select: {"username": 1, "image": 1, "_id": 1}
+        })
         res.status(200).json(response)
         
     } catch (error) {
@@ -66,7 +67,7 @@ router.get("/:rutaId", async (req, res, next) => {
 // POST crear una ruta
 // api/rutas
 router.post("/", async (req, res, next) => {
-    console.log(req.body)
+    
     const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, provincia, creador, image, coordinatesStart, coordinatesEnd } = req.body
 
     const response = await Rutas.create({
@@ -79,7 +80,7 @@ router.post("/", async (req, res, next) => {
 // /api/rutas/:rutaId
 router.patch("/image/:rutaId", async (req, res, next) => {
     const {image} = req.body
-    // console.log(req.params.rutaId)
+    
     try {
         const response = await Rutas.findByIdAndUpdate(req.params.rutaId, {image}, {new: true})
         res.status(202).json(response)
@@ -93,7 +94,7 @@ router.patch("/image/:rutaId", async (req, res, next) => {
 // /api/rutas/:rutaId
 router.patch("/details/:rutaId", async (req, res, next) => {
     const { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, provincia } = req.body
-    // console.log(req.params.rutaId)
+    
     try {
         const response = await Rutas.findByIdAndUpdate(req.params.rutaId, { name, difficulty, distanciaEnKm, desnivelEnM, duracionEnHoras, modalidad, provincia }, {new: true})
         res.status(202).json(response)
