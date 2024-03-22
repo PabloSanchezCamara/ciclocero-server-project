@@ -120,15 +120,6 @@ router.patch("/username", async (req, res, next) => {
     }
 })
 
-// DELETE para eliminar usuario loggeado
-// /api/user
-router.delete("/", async (req, res, next) => {
-    try {
-        await User.findByIdAndDelete(req.payload._id)
-        res.status(202).json({message: "usuario eliminado"})
-    } catch (error) {
-        next(error)
-    }
-})
+
 
 module.exports = router;

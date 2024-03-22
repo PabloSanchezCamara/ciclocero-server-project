@@ -40,7 +40,7 @@ const rutaSchema = new Schema({
         type: String,
         default: "https://www.lugaresdeaventura.com/sites/default/files/2018-07/suiza-paraiso-ciclista-portada.jpg"
     },
-    coordinatesStart: [Number], //preguntar si hacer un array de arrays con cada punto de la ruta
+    coordinatesStart: [Number], 
     coordinatesEnd: [Number]
 })
 

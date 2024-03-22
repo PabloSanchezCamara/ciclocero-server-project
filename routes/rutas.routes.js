@@ -50,6 +50,7 @@ router.get("/query", async (req, res, next) => {
 })
 
 // GET listar detalles de una ruta
+// /api/rutas/:rutaId
 router.get("/:rutaId", async (req, res, next) => {
     try {
 
